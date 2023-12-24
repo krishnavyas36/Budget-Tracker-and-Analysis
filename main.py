@@ -49,7 +49,7 @@ if n > 0:
             if category in allowed_categories:
                 break
             else:
-                category = Other
+                category = "Other"
 
         # Input amount with validation
         while True:
