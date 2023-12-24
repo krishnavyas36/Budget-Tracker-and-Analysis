@@ -49,7 +49,7 @@ if n > 0:
             if category in allowed_categories:
                 break
             else:
-                print("Invalid category. Please choose from the allowed categories.")
+                category = Other
 
         # Input amount with validation
         while True:
