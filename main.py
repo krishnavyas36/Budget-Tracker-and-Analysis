@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 
 class ExpenseTracker:
     def __init__(self, user_name):
@@ -20,6 +21,9 @@ class ExpenseTracker:
 user_name = input("Enter your name: ")
 n = int(input("Enter the number of transactions to input: "))
 
+# Define allowed categories
+allowed_categories = ['Food', 'Entertainment', 'Transportation', 'Utilities', 'Other']
+
 # Check if the user wants to input transactions
 if n > 0:
     # Create an instance of the ExpenseTracker class
@@ -27,10 +31,35 @@ if n > 0:
 
     # Input transactions
     for _ in range(n):
-        date = input("Enter date: ")
+        date_option = input("Enter 'C' for custom date or 'T' for today's date: ").upper()
+
+        if date_option == 'C':
+            date = input("Enter date (dd-mm-yyyy): ")
+        elif date_option == 'T':
+            date = datetime.now().strftime('%d-%m-%Y')
+        else:
+            print("Invalid option. Using today's date.")
+            date = datetime.now().strftime('%d-%m-%Y')
+
         description = input("Enter description: ")
-        category = input("Enter Category: ")
-        amount = input("Enter your amount: ")
+
+        # Input category with validation
+        while True:
+            category = input("Enter Category (Food/Entertainment/Transportation/Utilities/Other): ").capitalize()
+            if category in allowed_categories:
+                break
+            else:
+                print("Invalid category. Please choose from the allowed categories.")
+
+        # Input amount with validation
+        while True:
+            amount_str = input("Enter your amount: ")
+            if amount_str.isdigit():
+                break
+            else:
+                print("Invalid amount. Please enter a numerical value.")
+
+        amount = float(amount_str)
 
         # Add the transaction to the tracker
         tracker.add_transaction(date, description, category, amount)
