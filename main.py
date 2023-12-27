@@ -71,6 +71,10 @@ class ExpenseTracker:
 #     print("No transactions entered.")
 
 transactionToBeAdded = get_data_on_submit()
+#This "transactionToBeAdded" value contains an array, which have all the values entered in ui
+#Following is the array format
+#[username,date,description,category,amount]
+
 tracker = ExpenseTracker(transactionToBeAdded[0])
 tracker.add_transaction(transactionToBeAdded[1],transactionToBeAdded[2],transactionToBeAdded[3],transactionToBeAdded[4])
 tracker.display_transactions()
