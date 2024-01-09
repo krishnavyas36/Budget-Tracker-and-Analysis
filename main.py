@@ -17,6 +17,9 @@ class ExpenseTracker:
     def display_transactions(self):
         # Display the current list of transactions
         print(self.transactions)
+    def save_to_excel(self, file_path='transactions.xlsx'):
+        # Save transactions to an Excel file
+        self.transactions.to_excel(file_path, index=False)
 
 # Example usage:
 # user_name = input("Enter your name: ")
@@ -74,3 +77,4 @@ transactionToBeAdded = get_data_on_submit()
 tracker = ExpenseTracker(transactionToBeAdded[0])
 tracker.add_transaction(transactionToBeAdded[1],transactionToBeAdded[2],transactionToBeAdded[3],transactionToBeAdded[4])
 tracker.display_transactions()
+tracker.save_to_excel()
