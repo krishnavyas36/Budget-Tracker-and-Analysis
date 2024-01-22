@@ -1,25 +1,30 @@
 import pandas as pd
 from datetime import datetime
 from gui import get_data_on_submit
+import uuid
 
 class ExpenseTracker:
     def __init__(self, user_name):
         # Initialize an empty DataFrame to store transactions
         self.user_name = user_name
-        self.transactions = pd.DataFrame(columns=['User', 'Date', 'Description', 'Category', 'Amount'])
+        self.transactions = pd.DataFrame(columns=['TransactionID', 'User', 'Date', 'Description', 'Category', 'Amount'])
 
     def add_transaction(self, date, description, category, amount):
-        # Add a new transaction to the DataFrame
-        new_transaction = pd.DataFrame([[self.user_name, date, description, category, amount]],
-                                       columns=['User', 'Date', 'Description', 'Category', 'Amount'])
+        # Generate a unique transaction ID using uuid
+        transaction_id = str(uuid.uuid4())
+        
+        # Add a new transaction to the DataFrame with the generated ID
+        new_transaction = pd.DataFrame([[transaction_id, self.user_name, date, description, category, amount]],
+                                       columns=['TransactionID', 'User', 'Date', 'Description', 'Category', 'Amount'])
         self.transactions = pd.concat([self.transactions, new_transaction], ignore_index=True)
 
     def display_transactions(self):
         # Display the current list of transactions
         print(self.transactions)
+
     def save_to_excel(self, file_path='transactions.xlsx'):
         # Save transactions to an Excel file
-        self.transactions.to_excel(file_path, index=False)
+        self.transactions.to_excel(file_path, index=False
 
 # Example usage:
 # user_name = input("Enter your name: ")
