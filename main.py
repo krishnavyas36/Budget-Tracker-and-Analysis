@@ -2,6 +2,7 @@ import pandas as pd
 from datetime import datetime
 from gui import get_data_on_submit
 import uuid
+import os
 
 class ExpenseTracker:
     def __init__(self, user_name):
@@ -23,8 +24,17 @@ class ExpenseTracker:
         print(self.transactions)
 
     def save_to_excel(self, file_path='transactions.xlsx'):
-        # Save transactions to an Excel file
-        self.transactions.to_excel(file_path, index=False)
+        # Check if the file exists
+        if os.path.exists(file_path):
+            # If the file exists, read existing data
+            existing_data = pd.read_excel(file_path)
+            # Append new transactions to existing data
+            updated_data = pd.concat([existing_data, self.transactions], ignore_index=True)
+            # Save the updated data to the Excel file
+            updated_data.to_excel(file_path, index=False)
+        else:
+            # If the file doesn't exist, save the current transactions to a new file
+            self.transactions.to_excel(file_path, index=False)
 
 # Example usage:
 # user_name = input("Enter your name: ")
