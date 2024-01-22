@@ -24,7 +24,7 @@ class ExpenseTracker:
 
     def save_to_excel(self, file_path='transactions.xlsx'):
         # Save transactions to an Excel file
-        self.transactions.to_excel(file_path, index=False
+        self.transactions.to_excel(file_path, index=False)
 
 # Example usage:
 # user_name = input("Enter your name: ")
