@@ -1,6 +1,5 @@
 import pandas as pd
 from datetime import datetime
-from gui import get_data_on_submit
 import uuid
 import os
 
@@ -23,7 +22,7 @@ class ExpenseTracker:
         # Display the current list of transactions
         print(self.transactions)
 
-    def save_to_excel(self, file_path='transactions.xlsx'):
+    def save_to_excel(self, file_path='newtransactions.xlsx'):
         # Check if the file exists
         if os.path.exists(file_path):
             # If the file exists, read existing data
@@ -88,8 +87,8 @@ class ExpenseTracker:
 # else:
 #     print("No transactions entered.")
 
-transactionToBeAdded = get_data_on_submit()
-tracker = ExpenseTracker(transactionToBeAdded[0])
-tracker.add_transaction(transactionToBeAdded[1],transactionToBeAdded[2],transactionToBeAdded[3],transactionToBeAdded[4])
-tracker.display_transactions()
-tracker.save_to_excel()
+# transactionToBeAdded = get_data_on_submit()
+# tracker = ExpenseTracker(transactionToBeAdded[0])
+# tracker.add_transaction(transactionToBeAdded[1],transactionToBeAdded[2],transactionToBeAdded[3],transactionToBeAdded[4])
+# tracker.display_transactions()
+# tracker.save_to_excel()
