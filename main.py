@@ -35,7 +35,19 @@ class ExpenseTracker:
         else:
             # If the file doesn't exist, save the current transactions to a new file
             self.transactions.to_excel(file_path, index=False)
+    def load_from_excel(self, file_path='transactions.xlsx'):
+        if os.path.exists(file_path):
+            self.transactions = pd.read_excel(file_path)
 
+    def filter_transactions(self, date=None, username=None, amount=None):
+        filtered_transactions = self.transactions
+        if date is not None:
+            filtered_transactions = filtered_transactions[filtered_transactions['Date'] == date]
+        if username is not None:
+            filtered_transactions = filtered_transactions[filtered_transactions['User'] == username]
+        if amount is not None:
+            filtered_transactions = filtered_transactions[filtered_transactions['Amount'] == amount]
+        return filtered_transactions
 # Example usage:
 # user_name = input("Enter your name: ")
 # n = int(input("Enter the number of transactions to input: "))
@@ -93,3 +105,6 @@ tracker = ExpenseTracker(transactionToBeAdded[0])
 tracker.add_transaction(transactionToBeAdded[1],transactionToBeAdded[2],transactionToBeAdded[3],transactionToBeAdded[4])
 tracker.display_transactions()
 tracker.save_to_excel()
+filtered = tracker.filter_transactions(date='2024-04-01', username='John', amount=50.0)
+print("Filtered Transactions:")
+print(filtered)
